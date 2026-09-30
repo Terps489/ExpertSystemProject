@@ -1,0 +1,187 @@
+[
+  {
+    "id": 46,
+    "category": "Веб-службы и приложения",
+    "name": "Backend недоступен",
+    "conditions": [
+      {
+        "parameter": "http_status",
+        "operator": "==",
+        "value": 502
+      },
+      {
+        "parameter": "backend_unavailable",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Reverse proxy возвращает HTTP 502 из-за недоступности backend-приложения",
+    "recommendations": [
+      "Проверить состояние backend-сервиса",
+      "Проверить доступность приложения"
+    ]
+  },
+  {
+    "id": 47,
+    "category": "Веб-службы и приложения",
+    "name": "Долгий ответ backend",
+    "conditions": [
+      {
+        "parameter": "http_status",
+        "operator": "==",
+        "value": 504
+      },
+      {
+        "parameter": "backend_response_time",
+        "operator": ">",
+        "value": 5000
+      }
+    ],
+    "diagnosis": "Backend отвечает слишком долго",
+    "recommendations": [
+      "Проверить производительность приложения",
+      "Проанализировать время обработки запросов"
+    ]
+  },
+  {
+    "id": 48,
+    "category": "Веб-службы и приложения",
+    "name": "Ошибка подключения к базе данных",
+    "conditions": [
+      {
+        "parameter": "http_status",
+        "operator": "==",
+        "value": 500
+      },
+      {
+        "parameter": "database_unavailable",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Приложение не может подключиться к базе данных",
+    "recommendations": [
+      "Проверить соединение с базой данных",
+      "Проверить параметры подключения"
+    ]
+  },
+  {
+    "id": 49,
+    "category": "Веб-службы и приложения",
+    "name": "Большое количество ошибок сервера",
+    "conditions": [
+      {
+        "parameter": "http_5xx_count",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "diagnosis": "Количество HTTP 5xx ошибок превышает допустимый уровень",
+    "recommendations": [
+      "Проверить журналы приложения",
+      "Проанализировать причины ошибок"
+    ]
+  },
+  {
+    "id": 50,
+    "category": "Веб-службы и приложения",
+    "name": "HTTP-сервис недоступен",
+    "conditions": [
+      {
+        "parameter": "http_port_unavailable",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Веб-сервис не принимает подключения по требуемому порту",
+    "recommendations": [
+      "Проверить состояние службы",
+      "Проверить сетевые настройки"
+    ]
+  },
+  {
+    "id": 51,
+    "category": "Веб-службы и приложения",
+    "name": "Ошибка маршрутизации приложения",
+    "conditions": [
+      {
+        "parameter": "http_404_count",
+        "operator": ">",
+        "value": 100
+      }
+    ],
+    "diagnosis": "Большое количество HTTP 404 ошибок",
+    "recommendations": [
+      "Проверить настройки URL",
+      "Проверить маршруты приложения"
+    ]
+  },
+  {
+    "id": 52,
+    "category": "Веб-службы и приложения",
+    "name": "Проблема прав доступа",
+    "conditions": [
+      {
+        "parameter": "http_403_count",
+        "operator": ">",
+        "value": 50
+      }
+    ],
+    "diagnosis": "Большое количество HTTP 403 ошибок",
+    "recommendations": [
+      "Проверить настройки авторизации",
+      "Проверить политики доступа"
+    ]
+  },
+  {
+    "id": 53,
+    "category": "Веб-службы и приложения",
+    "name": "Большой размер HTTP-ответов",
+    "conditions": [
+      {
+        "parameter": "response_size",
+        "operator": ">",
+        "value": 10240
+      }
+    ],
+    "diagnosis": "Размер HTTP-ответа превышает ожидаемое значение",
+    "recommendations": [
+      "Проверить формирование ответа приложения",
+      "Проверить обработку данных"
+    ]
+  },
+  {
+    "id": 54,
+    "category": "Веб-службы и приложения",
+    "name": "Перегрузка веб-сервера",
+    "conditions": [
+      {
+        "parameter": "active_connections",
+        "operator": ">",
+        "value": 1000
+      }
+    ],
+    "diagnosis": "Количество активных HTTP-соединений превышает допустимое значение",
+    "recommendations": [
+      "Проверить количество подключений",
+      "Проверить настройки ограничения соединений"
+    ]
+  },
+  {
+    "id": 55,
+    "category": "Веб-службы и приложения",
+    "name": "Высокое время ответа HTTP",
+    "conditions": [
+      {
+        "parameter": "http_response_time",
+        "operator": ">",
+        "value": 3000
+      }
+    ],
+    "diagnosis": "Время ответа HTTP-запросов превышает допустимое значение",
+    "recommendations": [
+      "Проверить нагрузку приложения",
+      "Проанализировать производительность сервиса"
+    ]
+  }
+]

@@ -1,0 +1,186 @@
+  [  
+    {
+      "id": 9,
+      "category": "Оперативная память",
+      "name": "Нехватка оперативной памяти",
+      "conditions": [
+        {
+          "parameter": "ram_usage",
+          "operator": ">",
+          "value": 90
+        },
+        {
+          "parameter": "swap_active",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Недостаточно оперативной памяти",
+      "recommendations": [
+        "Проверить процессы, потребляющие память",
+        "Рассмотреть увеличение объема RAM"
+      ]
+    },
+  
+    {
+      "id": 10,
+      "category": "Оперативная память",
+      "name": "Риск OOM Killer",
+      "conditions": [
+        {
+          "parameter": "ram_usage",
+          "operator": ">",
+          "value": 95
+        },
+        {
+          "parameter": "swap_active",
+          "operator": "==",
+          "value": false
+        },
+        {
+          "parameter": "free_memory_low",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Возможное завершение процессов OOM Killer",
+      "recommendations": [
+        "Освободить оперативную память",
+        "Проверить процессы с высоким потреблением памяти"
+      ]
+    },
+  
+    {
+      "id": 11,
+      "category": "Оперативная память",
+      "name": "Срабатывание OOM Killer",
+      "conditions": [
+        {
+          "parameter": "oom_log_found",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Процесс был завершен из-за нехватки памяти",
+      "recommendations": [
+        "Проверить системные журналы",
+        "Увеличить доступную память"
+      ]
+    },
+  
+    {
+      "id": 12,
+      "category": "Оперативная память",
+      "name": "Утечка памяти в процессе",
+      "conditions": [
+        {
+          "parameter": "process_memory_growth",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Обнаружена возможная утечка памяти в приложении",
+      "recommendations": [
+        "Проверить приложение",
+        "Проанализировать рост потребления памяти",
+        "Проверить освобождение памяти после завершения нагрузки"
+      ]
+    },
+  
+    {
+      "id": 13,
+      "category": "Оперативная память",
+      "name": "Процесс потребляет большую часть памяти",
+      "conditions": [
+        {
+          "parameter": "ram_usage",
+          "operator": ">",
+          "value": 90
+        },
+        {
+          "parameter": "process_memory_usage",
+          "operator": ">",
+          "value": 70
+        }
+      ],
+      "diagnosis": "Источник проблемы связан с отдельным процессом",
+      "recommendations": [
+        "Определить процесс с высоким потреблением памяти"
+      ]
+    },
+  
+    {
+      "id": 14,
+      "category": "Оперативная память",
+      "name": "Избыточное использование swap",
+      "conditions": [
+        {
+          "parameter": "swap_usage",
+          "operator": ">",
+          "value": 80
+        },
+        {
+          "parameter": "performance_degraded",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Система активно использует подкачку",
+      "recommendations": [
+        "Проверить использование RAM",
+        "Оптимизировать процессы"
+      ]
+    },
+  
+    {
+      "id": 15,
+      "category": "Оперативная память",
+      "name": "Использование памяти под системный кеш",
+      "conditions": [
+        {
+          "parameter": "free_memory_low",
+          "operator": "==",
+          "value": true
+        },
+        {
+          "parameter": "cache_usage_high",
+          "operator": "==",
+          "value": true
+        },
+        {
+          "parameter": "system_working",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Недостаток оперативной памяти не подтвержден, большая часть памяти используется под кеш",
+      "recommendations": [
+        "Проверить динамику использования памяти",
+        "Дополнительное освобождение памяти не требуется"
+      ]
+    },
+  
+    {
+      "id": 16,
+      "category": "Оперативная память",
+      "name": "Высокое потребление памяти большим количеством процессов",
+      "conditions": [
+        {
+          "parameter": "ram_usage",
+          "operator": ">",
+          "value": 85
+        },
+        {
+          "parameter": "process_count",
+          "operator": ">",
+          "value": 300
+        }
+      ],
+      "diagnosis": "Большое количество процессов приводит к повышенному потреблению оперативной памяти",
+      "recommendations": [
+        "Проверить количество запущенных процессов",
+        "Определить процессы с высоким потреблением памяти",
+        "Завершить ненужные процессы"
+      ]
+    }
+  ]

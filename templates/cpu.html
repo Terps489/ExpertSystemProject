@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>CPU диагностика</title>
+</head>
+
+<body>
+
+<h1>Диагностика процессора</h1>
+
+{% include "menu.html" %}
+
+
+<form method="post" action="/cpu/analyze">
+
+<div class="main-grid">
+
+    <div class="card">
+
+        <h2>Основные показатели</h2>
+
+        <div class="input-list">
+
+            <label>
+                Использование CPU (%):
+                <input type="number"
+                    name="cpu_usage"
+                    value="{{ cpu_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Максимальная загрузка одного процесса CPU (%):
+                <input type="number"
+                    name="process_cpu_usage"
+                    value="{{ process_cpu_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                I/O Wait (%):
+                <input type="number"
+                    name="io_wait"
+                    value="{{ io_wait | default(0) }}">
+            </label>
+
+
+            <label>
+                Количество процессов:
+                <input type="number"
+                    name="process_count"
+                    value="{{ process_count | default(0) }}">
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Состояние системы</h2>
+
+        <div class="checkbox-list">
+
+            <label>
+                <input type="checkbox"
+                       name="load_high"
+                       value="true"
+                       {% if load_high %}checked{% endif %}>
+                Load Average высокий
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="resource_wait"
+                       value="true"
+                       {% if resource_wait %}checked{% endif %}>
+                Процессы ожидают системные ресурсы
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="performance_degraded"
+                       value="true"
+                       {% if performance_degraded %}checked{% endif %}>
+                Снизилась производительность
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="service_cpu_source"
+                       value="true"
+                       {% if service_cpu_source %}checked{% endif %}>
+                Нагрузка появилась после запуска службы
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="system_cpu_high"
+                       value="true"
+                       {% if system_cpu_high %}checked{% endif %}>
+                CPU используется системными процессами
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<button type="submit">Провести анализ</button>
+
+</form>
+
+
+
+
+{% if results %}
+
+<div class="result">
+
+
+<h2>Результат:</h2>
+
+
+{% for result in results %}
+
+
+<h3>{{ result.name }}</h3>
+
+
+<p>Уверенность: {{ result.confidence }}</p>
+
+
+<ul>
+
+{% for item in result.recommendations %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endif %}
+
+
+
+</body>
+
+</html>

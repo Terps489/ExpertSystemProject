@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Результаты диагностики</title>
+</head>
+
+<body>
+
+<h1>Результаты диагностики Linux-сервера</h1>
+
+{% include "menu.html" %}
+
+
+{% if results %}
+
+<div class="result">
+
+    {% for result in results %}
+
+    <div class="card">
+
+        <h2>{{ result.category }}</h2>
+
+        <h3>{{ result.name }}</h3>
+
+        <p>Уверенность: {{ result.confidence }}</p>
+
+        <h3>Рекомендации:</h3>
+
+        <ul>
+
+        {% for item in result.recommendations %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% else %}
+
+<div class="result">
+
+    <div class="card">
+
+        <h2>Проблем не обнаружено</h2>
+
+        <p>В текущем состоянии системы отсутствуют сохраненные диагностические ошибки.</p>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+</body>
+
+</html>

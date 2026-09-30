@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #111;
+    color: #d0d0d0;
+    font-family: Arial, sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+    color: #d0d0d0;
+    text-shadow: 0 0 10px rgba(255,255,255,0.15);
+}
+
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin: 30px;
+}
+
+.main-grid {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card {
+    flex: 1;
+
+    background: #181818;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.input-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.input-list input {
+    width: 7%;
+}
+
+.input-list label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+button {
+    display: block;
+    margin: 30px auto;
+
+    width: 250px;
+    height: 55px;
+
+    background: #050505;
+    color: #d0d0d0;
+
+    border: 1px solid #444;
+    border-radius: 10px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+button:hover {
+    background: #222;
+    border-color: #777;
+    color: #f1f88e;
+}

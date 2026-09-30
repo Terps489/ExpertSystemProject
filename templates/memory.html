@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>RAM диагностика</title>
+</head>
+
+<body>
+
+<h1>Диагностика оперативной памяти</h1>
+
+{% include "menu.html" %}
+
+
+<form method="post" action="/memory/analyze">
+
+
+<div class="main-grid">
+
+    <div class="card">
+
+        <h2>Основные показатели</h2>
+
+        <div class="input-list">
+
+            <label>
+                Использование RAM (%):
+                <input type="number"
+                       name="ram_usage"
+                       value="{{ ram_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Использование swap (%):
+                <input type="number"
+                       name="swap_usage"
+                       value="{{ swap_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Максимальное использование памяти одним процессом (%):
+                <input type="number"
+                       name="process_memory_usage"
+                       value="{{ process_memory_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Количество процессов:
+                <input type="number"
+                       name="process_count"
+                       value="{{ process_count | default(0) }}">
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <h2>Состояние системы</h2>
+
+        <div class="checkbox-list">
+
+            <label>
+                <input type="checkbox"
+                       name="swap_active"
+                       value="true"
+                       {% if swap_active %}checked{% endif %}>
+                Используется swap
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="oom_log_found"
+                       value="true"
+                       {% if oom_log_found %}checked{% endif %}>
+                Есть сообщения OOM Killer
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="process_memory_growth"
+                       value="true"
+                       {% if process_memory_growth %}checked{% endif %}>
+                Растет память отдельного процесса
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="performance_degraded"
+                       value="true"
+                       {% if performance_degraded %}checked{% endif %}>
+                Снизилась производительность
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="free_memory_low"
+                       value="true"
+                       {% if free_memory_low %}checked{% endif %}>
+                Свободной памяти мало
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="cache_usage_high"
+                       value="true"
+                       {% if cache_usage_high %}checked{% endif %}>
+                Высокое использование cache
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="system_working"
+                       value="true"
+                       {% if system_working %}checked{% endif %}>
+                Система работает нормально
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<button type="submit">Провести анализ</button>
+
+
+</form>
+
+
+
+
+{% if results %}
+
+<div class="result">
+
+
+<h2>Результат:</h2>
+
+
+{% for result in results %}
+
+
+<h3>{{ result.name }}</h3>
+
+
+<p>Уверенность: {{ result.confidence }}</p>
+
+
+<ul>
+
+{% for item in result.recommendations %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endif %}
+
+
+
+</body>
+
+</html>

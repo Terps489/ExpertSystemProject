@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Службы диагностика</title>
+</head>
+
+<body>
+
+<h1>Диагностика сетевых портов и служб</h1>
+
+{% include "menu.html" %}
+
+
+<form method="post" action="/services/analyze">
+
+
+<div class="main-grid">
+
+    <div class="card">
+
+        <h2>Основные показатели</h2>
+
+        <div class="input-list">
+
+            <label>
+                Количество перезапусков службы:
+                <input type="number"
+                       name="restart_count"
+                       value="{{ restart_count | default(0) }}">
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <h2>Состояние системы</h2>
+
+        <div class="checkbox-list">
+
+
+            <label>
+                <input type="checkbox"
+                       name="service_inactive"
+                       value="true"
+                       {% if service_inactive %}checked{% endif %}>
+                Служба остановлена (inactive)
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="service_failed"
+                       value="true"
+                       {% if service_failed %}checked{% endif %}>
+                Ошибка запуска службы (failed)
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="service_port_missing"
+                       value="true"
+                       {% if service_port_missing %}checked{% endif %}>
+                Служба не прослушивает требуемый порт
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="port_conflict"
+                       value="true"
+                       {% if port_conflict %}checked{% endif %}>
+                Требуемый порт занят другим процессом
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="service_local_only"
+                       value="true"
+                       {% if service_local_only %}checked{% endif %}>
+                Служба доступна только через 127.0.0.1
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="remote_port_unavailable"
+                       value="true"
+                       {% if remote_port_unavailable %}checked{% endif %}>
+                Порт недоступен удаленно
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="dependency_failed"
+                       value="true"
+                       {% if dependency_failed %}checked{% endif %}>
+                Зависимая служба находится в состоянии failed
+            </label>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<button type="submit">Провести анализ</button>
+
+
+</form>
+
+
+
+
+{% if results %}
+
+<div class="result">
+
+
+<h2>Результат:</h2>
+
+
+{% for result in results %}
+
+
+<h3>{{ result.name }}</h3>
+
+
+<p>Уверенность: {{ result.confidence }}</p>
+
+
+<ul>
+
+{% for item in result.recommendations %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endif %}
+
+
+
+</body>
+
+</html>

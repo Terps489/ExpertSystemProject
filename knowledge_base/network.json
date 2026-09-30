@@ -1,0 +1,191 @@
+[
+    {
+      "id": 27,
+      "category": "Сетевое подключение",
+      "name": "Сетевой интерфейс отключен",
+      "conditions": [
+        {
+          "parameter": "interface_down",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Сетевое соединение через интерфейс отсутствует",
+      "recommendations": [
+        "Проверить состояние сетевого интерфейса"
+      ]
+    },
+  
+    {
+      "id": 28,
+      "category": "Сетевое подключение",
+      "name": "Отсутствует IP-адрес",
+      "conditions": [
+        {
+          "parameter": "interface_no_ip",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Вероятна ошибка сетевой настройки",
+      "recommendations": [
+        "Проверить работу DHCP",
+        "Проверить конфигурацию IP-адреса"
+      ]
+    },
+  
+    {
+      "id": 29,
+      "category": "Сетевое подключение",
+      "name": "Отсутствует маршрут по умолчанию",
+      "conditions": [
+        {
+          "parameter": "default_route_missing",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Обнаружена ошибка таблицы маршрутизации",
+      "recommendations": [
+        "Проверить настройки маршрутов"
+      ]
+    },
+  
+    {
+      "id": 30,
+      "category": "Сетевое подключение",
+      "name": "Недоступен шлюз",
+      "conditions": [
+        {
+          "parameter": "gateway_unavailable",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Вероятна проблема локальной сети",
+      "recommendations": [
+        "Проверить соединение с маршрутизатором"
+      ]
+    },
+  
+    {
+      "id": 31,
+      "category": "Сетевое подключение",
+      "name": "Недоступен внешний адрес",
+      "conditions": [
+        {
+          "parameter": "external_ip_unavailable",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Вероятна проблема маршрутизации или межсетевого экрана",
+      "recommendations": [
+        "Проверить сетевые правила",
+        "Проверить доступность внешнего подключения"
+      ]
+    },
+  
+    {
+      "id": 32,
+      "category": "Сетевое подключение",
+      "name": "Ошибка DNS-разрешения",
+      "conditions": [
+        {
+          "parameter": "dns_failed",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Возникла проблема разрешения DNS-запросов",
+      "recommendations": [
+        "Проверить настройки DNS"
+      ]
+    },
+  
+    {
+      "id": 33,
+      "category": "Сетевое подключение",
+      "name": "DNS-сервер недоступен",
+      "conditions": [
+        {
+          "parameter": "dns_server_unavailable",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Разрешение имен невозможно из-за недоступности DNS-сервера",
+      "recommendations": [
+        "Проверить доступность DNS-сервера"
+      ]
+    },
+  
+    {
+      "id": 34,
+      "category": "Сетевое подключение",
+      "name": "Ошибка DNS-записи",
+      "conditions": [
+        {
+          "parameter": "domain_resolution_failed",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Доменное имя не разрешается",
+      "recommendations": [
+        "Проверить DNS-зону"
+      ]
+    },
+  
+    {
+      "id": 35,
+      "category": "Сетевое подключение",
+      "name": "Нестабильное сетевое соединение",
+      "conditions": [
+        {
+          "parameter": "packet_loss",
+          "operator": ">",
+          "value": 10
+        }
+      ],
+      "diagnosis": "Обнаружены значительные потери сетевых пакетов",
+      "recommendations": [
+        "Проверить качество сетевого подключения"
+      ]
+    },
+  
+    {
+      "id": 36,
+      "category": "Сетевое подключение",
+      "name": "Ошибка настройки MTU",
+      "conditions": [
+        {
+          "parameter": "large_packets_failed",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Передача больших пакетов невозможна",
+      "recommendations": [
+        "Проверить параметры сетевого интерфейса",
+        "Проверить значение MTU"
+      ]
+    },
+  
+    {
+      "id": 37,
+      "category": "Сетевое подключение",
+      "name": "Конфликт IP-адресов",
+      "conditions": [
+        {
+          "parameter": "ip_conflict",
+          "operator": "==",
+          "value": true
+        }
+      ],
+      "diagnosis": "Несколько устройств используют один IP-адрес",
+      "recommendations": [
+        "Проверить сетевую конфигурацию"
+      ]
+    }
+  ]

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Disk диагностика</title>
+</head>
+
+<body>
+
+<h1>Диагностика дисковой подсистемы</h1>
+
+{% include "menu.html" %}
+
+
+<form method="post" action="/disk/analyze">
+
+
+<div class="main-grid">
+
+    <div class="card">
+
+        <h2>Основные показатели</h2>
+
+        <div class="input-list">
+
+            <label>
+                Использование файловой системы (%):
+                <input type="number"
+                       name="filesystem_usage"
+                       value="{{ filesystem_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Использование /var (%):
+                <input type="number"
+                       name="var_usage"
+                       value="{{ var_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                Использование inode (%):
+                <input type="number"
+                       name="inode_usage"
+                       value="{{ inode_usage | default(0) }}">
+            </label>
+
+
+            <label>
+                I/O Wait (%):
+                <input type="number"
+                       name="io_wait"
+                       value="{{ io_wait | default(0) }}">
+            </label>
+
+
+            <label>
+                Время ответа диска (мс):
+                <input type="number"
+                       name="disk_response_time"
+                       value="{{ disk_response_time | default(0) }}">
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <h2>Состояние системы</h2>
+
+        <div class="checkbox-list">
+
+            <label>
+                <input type="checkbox"
+                       name="free_space_available"
+                       value="true"
+                       {% if free_space_available %}checked{% endif %}>
+                Есть свободное место на диске
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="filesystem_read_only"
+                       value="true"
+                       {% if filesystem_read_only %}checked{% endif %}>
+                Файловая система только для чтения
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="mount_point_missing"
+                       value="true"
+                       {% if mount_point_missing %}checked{% endif %}>
+                Отсутствует точка монтирования
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="mount_failed"
+                       value="true"
+                       {% if mount_failed %}checked{% endif %}>
+                Ошибка монтирования файловой системы
+            </label>
+
+
+            <label>
+                <input type="checkbox"
+                       name="io_error_found"
+                       value="true"
+                       {% if io_error_found %}checked{% endif %}>
+                Обнаружены ошибки ввода-вывода
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<button type="submit">Провести анализ</button>
+
+
+</form>
+
+
+
+
+{% if results %}
+
+<div class="result">
+
+
+<h2>Результат:</h2>
+
+
+{% for result in results %}
+
+
+<h3>{{ result.name }}</h3>
+
+
+<p>Уверенность: {{ result.confidence }}</p>
+
+
+<ul>
+
+{% for item in result.recommendations %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endif %}
+
+
+
+</body>
+
+</html>

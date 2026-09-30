@@ -1,0 +1,142 @@
+[
+  {
+    "id": 38,
+    "category": "Сетевые порты и службы",
+    "name": "Служба остановлена",
+    "conditions": [
+      {
+        "parameter": "service_inactive",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Служба находится в состоянии inactive",
+    "recommendations": [
+      "Проверить состояние службы",
+      "При необходимости выполнить запуск службы"
+    ]
+  },
+
+  {
+    "id": 39,
+    "category": "Сетевые порты и службы",
+    "name": "Ошибка выполнения службы",
+    "conditions": [
+      {
+        "parameter": "service_failed",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Служба находится в состоянии failed",
+    "recommendations": [
+      "Изучить журналы службы",
+      "Проверить конфигурацию"
+    ]
+  },
+
+  {
+    "id": 40,
+    "category": "Сетевые порты и службы",
+    "name": "Цикл аварийного перезапуска службы",
+    "conditions": [
+      {
+        "parameter": "restart_count",
+        "operator": ">",
+        "value": 5
+      }
+    ],
+    "diagnosis": "Служба часто перезапускается за короткий период",
+    "recommendations": [
+      "Проверить причины завершения службы",
+      "Изучить системные журналы"
+    ]
+  },
+
+  {
+    "id": 41,
+    "category": "Сетевые порты и службы",
+    "name": "Служба не прослушивает порт",
+    "conditions": [
+      {
+        "parameter": "service_port_missing",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Активная служба не прослушивает требуемый TCP-порт",
+    "recommendations": [
+      "Проверить настройки приложения",
+      "Проверить параметры прослушивания"
+    ]
+  },
+
+  {
+    "id": 42,
+    "category": "Сетевые порты и службы",
+    "name": "Конфликт сетевого порта",
+    "conditions": [
+      {
+        "parameter": "port_conflict",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Требуемый порт занят другим процессом",
+    "recommendations": [
+      "Определить процесс, использующий порт"
+    ]
+  },
+
+  {
+    "id": 43,
+    "category": "Сетевые порты и службы",
+    "name": "Локальное прослушивание службы",
+    "conditions": [
+      {
+        "parameter": "service_local_only",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Служба доступна только через 127.0.0.1",
+    "recommendations": [
+      "Проверить настройки сетевого прослушивания"
+    ]
+  },
+
+  {
+    "id": 44,
+    "category": "Сетевые порты и службы",
+    "name": "Порт недоступен удаленно",
+    "conditions": [
+      {
+        "parameter": "remote_port_unavailable",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Порт доступен локально, но недоступен с удаленного узла",
+    "recommendations": [
+      "Проверить настройки firewall",
+      "Проверить сетевые правила"
+    ]
+  },
+
+  {
+    "id": 45,
+    "category": "Сетевые порты и службы",
+    "name": "Ошибка зависимой службы",
+    "conditions": [
+      {
+        "parameter": "dependency_failed",
+        "operator": "==",
+        "value": true
+      }
+    ],
+    "diagnosis": "Зависимая служба находится в состоянии failed",
+    "recommendations": [
+      "Проверить состояние связанных служб"
+    ]
+  }
+]
